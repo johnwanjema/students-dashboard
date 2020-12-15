@@ -63,15 +63,15 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Reports</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/unresolvedpaymnts">Paid Students Payments</router-link></li>
-                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/resolvedpayments">Students Not paid </router-link></li>
+                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/paidstudents">Paid Students Payments</router-link></li>
+                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/notpaidstudents">Students Not paid </router-link></li>
                             </ul>
                         </li>
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Config</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/unresolvedpaymnts">SMS Reminders</router-link></li>
-                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/resolvedpayments">Users Admim </router-link></li>
+                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/sms">SMS Reminders</router-link></li>
+                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/useradmins">Users Admim </router-link></li>
                             </ul>
                         </li>
                     </ul>

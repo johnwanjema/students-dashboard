@@ -3,14 +3,22 @@ import Example from '../components/ExampleComponent';
 import Dashboard from '../components/Dashboard';
 
 //Students
-import RegisteredStudents from '../components/students/registeredStudents.vue';
-import UnRegisteredStudents from '../components/students/UnregistredStudents.vue';
+import RegisteredStudents from '../components/students/registeredStudents';
+import UnRegisteredStudents from '../components/students/UnregistredStudents';
 
 //payments
-import UnResolvedPayments from '../components/payments/unresolvedPayments.vue';
-import resolvedPayments from '../components/payments/resolvedPayments.vue';
-import cancelledPayments from '../components/payments/cancelledPayments.vue';
-import allPayments from '../components/payments/allPayments.vue';
+import UnResolvedPayments from '../components/payments/unresolvedPayments';
+import resolvedPayments from '../components/payments/resolvedPayments';
+import cancelledPayments from '../components/payments/cancelledPayments';
+import allPayments from '../components/payments/allPayments';
+
+//Reports
+import paidStudents from '../components/reports/paidPayments';
+import notPaidStudents from '../components/reports/studentsNotPaid';
+
+// Config
+import smsReminders from '../components/config/smsReminders';
+import userAdmins from '../components/config/usersAdmin';
 
 
 export default [
@@ -59,5 +67,27 @@ export default [
         path: '/admin/payments',
         component: allPayments,
         name: 'allPayments',
+    },
+    // Reports
+    {
+        path: '/admin/paidStudents',
+        component: paidStudents,
+        name: 'paidStudents',
+    },
+    {
+        path: '/admin/notpaidstudents',
+        component: notPaidStudents,
+        name: 'notPaidStudents',
+    },
+    // Config
+    {
+        path: '/admin/sms',
+        component: smsReminders,
+        name: 'smsReminders',
+    },
+    {
+        path: '/admin/useradmins',
+        component: userAdmins,
+        name: 'userAdmins',
     },
 ]
