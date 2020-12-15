@@ -12,6 +12,9 @@ import resolvedPayments from '../components/payments/resolvedPayments.vue';
 import cancelledPayments from '../components/payments/cancelledPayments.vue';
 import allPayments from '../components/payments/allPayments.vue';
 
+//Reports
+import paidStudents from '../components/reports/paidPayments.vue';
+import notPaidStudents from '../components/reports/studentsNotPaid.vue';
 
 export default [
     {
@@ -60,4 +63,16 @@ export default [
         component: allPayments,
         name: 'allPayments',
     },
+    // Reports
+    {
+        path: '/admin/paidStudents',
+        component: paidStudents,
+        name: 'paidStudents',
+    },
+    {
+        path: '/admin/notpaidstudents',
+        component: notPaidStudents,
+        name: 'notPaidStudents',
+    },
+    // Config
 ]
