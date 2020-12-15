@@ -1,6 +1,10 @@
 import Example from '../components/ExampleComponent';
-import Dashboard from '../components/Dashboard';
 // Dashboard
+import Dashboard from '../components/Dashboard';
+
+//Students
+import RegisteredStudents from '../components/students/registeredStudents.vue';
+import UnRegisteredStudents from '../components/students/UnregistredStudents.vue';
 
 export default [
     {
@@ -16,5 +20,16 @@ export default [
         path: '/admin/dashboard',
         component: Dashboard,
         name: 'Dashboard',
+    },
+    // Students
+    {
+        path: '/admin/registered-students',
+        component: RegisteredStudents,
+        name: 'RegisteredStudents',
+    },
+    {
+        path: '/admin/unregistered-students',
+        component: UnRegisteredStudents,
+        name: 'UnRegisteredStudents',
     },
 ]
