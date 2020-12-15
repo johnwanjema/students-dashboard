@@ -54,7 +54,7 @@
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Payments</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/unresolvedpaymnts">Unresolved Payments</router-link></li>
+                                <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/unresolvedpayments">Unresolved Payments</router-link></li>
                                 <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/resolvedpayments">Resolved Payments</router-link></li>
                                 <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/cancelledpayments">Cancelled Payments</router-link></li>
                                 <li><i class="fa fa-puzzle-piece"></i><router-link to="/admin/payments">All Payments</router-link></li>
