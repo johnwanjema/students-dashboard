@@ -16,11 +16,12 @@
                                         <div class="dataTables_length" id="bootstrap-data-table_length">
                                             <label>
                                                 Show
-                                                <select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
+                                                <select v-model="perPage" name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
+                                                    <option value="5">5</option>
                                                     <option value="10">10</option>
                                                     <option value="20">20</option>
                                                     <option value="50">50</option>
-                                                    <option value="-1">All</option>
+                                                    <!-- <option value="-1">All</option> -->
                                                 </select>
                                                 entries
                                             </label>
@@ -40,7 +41,8 @@
                                         <b-button size="sm">Small Button</b-button>
                                     </div> -->
                                 </div><br>
-                                <b-table :items="items" :fields="fields"></b-table>
+                                <b-table :items="items" :per-page="perPage" :current-page="currentPage" :fields="fields" :filter="filter" show-empty @filtered="onFiltered"></b-table>
+                                <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" aria-controls="my-table"></b-pagination>
                             </div>
                         </div>
                     </div>
@@ -61,8 +63,26 @@ export default {
                 { class: 8, first_name: 'Geneva', last_name: 'Wilson' },
                 { class: 3, first_name: 'Jami', last_name: 'Carney' }
             ],
-            filter:''
+            filter:'',
+            perPage: 5,
+            currentPage: 1,
+            filter: null,
+            totalRows: 1,
         }
-    }
+    },
+    computed: {
+        rows() {
+            return this.items.length
+        }
+    },
+    methods: {
+        onFiltered(filteredItems) {
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
+        }
+    },
+    mounted() {
+        this.totalRows = this.items.length
+    },
 }
 </script>
