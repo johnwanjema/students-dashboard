@@ -15,16 +15,16 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dataTables_length" id="bootstrap-data-table_length">
                                             <label>
-                                                        Show
-                                                        <select v-model="perPage" name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
-                                                            <option value="5">5</option>
-                                                            <option value="10">10</option>
-                                                            <option value="20">20</option>
-                                                            <option value="50">50</option>
-                                                            <!-- <option value="-1">All</option> -->
-                                                        </select>
-                                                        entries
-                                                    </label>
+                                                Show
+                                                <select v-model="perPage" name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                    <!-- <option value="-1">All</option> -->
+                                                </select>
+                                                entries
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
@@ -58,12 +58,11 @@ export default {
         return {
             fields: ['first_name', 'last_name', 'class'],
             items: [
-                { class: 5, first_name: 'Dickerson', last_name: 'Macdonald' },
-                { class: 2, first_name: 'Larsen', last_name: 'Shaw' },
-                { class: 8, first_name: 'Geneva', last_name: 'Wilson' },
-                { class: 3, first_name: 'Jami', last_name: 'Carney' }
+                { class: 'abc', first_name: 'Dickerson', last_name: 'Macdonald' },
+                { class: 'efg', first_name: 'Larsen', last_name: 'Shaw' },
+                { class: 'ijk', first_name: 'Geneva', last_name: 'Wilson' },
+                { class: 'mno', first_name: 'Jami', last_name: 'Carney' }
             ],
-            filter: '',
             perPage: 5,
             currentPage: 1,
             filter: null,

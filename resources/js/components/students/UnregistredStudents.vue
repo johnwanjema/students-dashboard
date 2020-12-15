@@ -63,7 +63,7 @@ export default {
                 { class: 8, first_name: 'Geneva', last_name: 'Wilson' },
                 { class: 3, first_name: 'Jami', last_name: 'Carney' }
             ],
-            filter:'',
+
             perPage: 5,
             currentPage: 1,
             filter: null,
