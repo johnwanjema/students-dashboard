@@ -60,11 +60,10 @@ export default {
             items: [
                 {name :'John Doe',amount:'1000', date:'10/12/2020'}
             ],
-            filter:"",
             perPage: 5,
             currentPage: 1,
             filter: null,
-            totalRows: 1,    
+            totalRows: 1,
         }
     },
     computed: {
