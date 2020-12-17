@@ -83,15 +83,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="company" class="form-control-label">First Name:</label>
-                            <input type="text" id="company" placeholder="Enter first name" class="form-control" />
+                            <input v-model="form.first_name" type="text" id="company" placeholder="Enter first name" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label  class="form-control-label">Last Name:</label>
-                            <input type="text" placeholder="Enter last name" class="form-control" />
+                            <input v-model="form.last_name" type="text" placeholder="Enter last name" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label  class="form-control-label">Class:</label>
-                            <input type="text" placeholder="Enter class" class="form-control" />
+                            <input v-model="form.class" type="number" placeholder="Enter class" class="form-control" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -124,6 +124,11 @@ export default {
             filter: null,
             totalRows: 1,
             editMode:false,
+            form : new Form({
+                first_name:'',
+                last_name:'',
+                class:'',
+            })
         }
     },
     computed: {
