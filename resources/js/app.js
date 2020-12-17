@@ -33,6 +33,8 @@ import { BootstrapVue } from 'bootstrap-vue'
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 
+import { Form } from 'vform'
+window.Form = Form;
 
 const app = new Vue({
     el: '#app',
