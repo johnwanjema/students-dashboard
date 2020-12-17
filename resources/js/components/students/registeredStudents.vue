@@ -13,7 +13,7 @@
                                         <strong class="card-title text-light">Registered Students</strong>
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button" class="btn btn-primary">Add Student</button>
+                                        <button @click="openModal" type="button" class="btn btn-primary">Add Student</button>
                                     </div>
                                 </div>
                             </div>
@@ -21,14 +21,16 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dataTables_length" id="bootstrap-data-table_length">
-                                            <label>Show
+                                            <label>
+                                                Show
                                                 <select v-model="perPage" name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
                                                     <option value="5">5</option>
                                                     <option value="10">10</option>
                                                     <option value="20">20</option>
                                                     <option value="50">50</option>
                                                     <!-- <option value="-1">All</option> -->
-                                                </select>entries
+                                                </select>
+                                                entries
                                             </label>
                                         </div>
                                     </div>
@@ -39,19 +41,21 @@
                                                 <b-button variant="dark" :disabled="!filter" @click="filter = ''">Clear</b-button>
                                             </b-input-group-append>
                                         </b-input-group>
+                                        <br/>
+                                        <b-button size="sm">Copy</b-button>
+                                        <b-button size="sm">Excel</b-button>
+                                        <b-button size="sm">CSV</b-button>
+                                        <b-button size="sm">PDF</b-button>
                                     </div>
-                                    <!-- <div class="col-sm-12 col-md-6"><br>
-                                        <b-button size="sm">Small Button</b-button>
-                                        <b-button size="sm">Small Button</b-button>
-                                        <b-button size="sm">Small Button</b-button>
-                                    </div> -->  
-                                </div><br>
+                                </div>
+                                <br/>
                                 <b-table bordered :items="items" :per-page="perPage" :current-page="currentPage" :fields="fields" :filter="filter" show-empty @filtered="onFiltered">
                                     <template v-slot:cell(actions)="row">
-                                        <b-button class="btn btn-sm" variant="success" >
+                                        <b-button class="btn btn-sm" variant="success" @click="openEditModal(row.item)">
                                             Edit
-                                        </b-button> &nbsp;
-                                        <b-button class="btn btn-sm" variant="danger" >
+                                        </b-button>
+                                        &nbsp;
+                                        <b-button class="btn btn-sm" variant="danger">
                                             Delete
                                         </b-button>
                                     </template>
@@ -66,10 +70,44 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 v-if="!editMode" class="modal-title" id="mediumModalLabel">Add student</h5>
+                        <h5 v-else class="modal-title" id="mediumModalLabel">Update student</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="company" class="form-control-label">First Name:</label>
+                            <input type="text" id="company" placeholder="Enter first name" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label  class="form-control-label">Last Name:</label>
+                            <input type="text" placeholder="Enter last name" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label  class="form-control-label">Class:</label>
+                            <input type="text" placeholder="Enter class" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button v-if="!editMode" type="button" class="btn btn-primary">Add Student</button>
+                        <button v-else type="button" class="btn btn-primary">Update Student</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
+
 <script>
+import $ from 'jquery';
 export default {
     data() {
         return {
@@ -85,6 +123,7 @@ export default {
             currentPage: 1,
             filter: null,
             totalRows: 1,
+            editMode:false,
         }
     },
     computed: {
@@ -96,6 +135,14 @@ export default {
         onFiltered(filteredItems) {
             this.totalRows = filteredItems.length
             this.currentPage = 1
+        },
+        openModal(){
+            $('#mediumModal').modal('show');
+            this.editMode = false;
+        },
+        openEditModal(student){
+            $('#mediumModal').modal('show');
+            this.editMode = true;
         }
     },
     mounted() {
