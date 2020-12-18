@@ -83,7 +83,6 @@ class PaymentController extends Controller
             if(isset($request['studentId']))
                 $payment->studentId = $request['studentId'];
 
-
             $payment->save();
             return api_response(true,null, 200, 'success','successfully updated payment', $payment);
         }catch (\Exception $exception){
