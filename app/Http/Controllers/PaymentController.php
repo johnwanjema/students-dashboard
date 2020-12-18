@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $students = Student::orderBy('firstName','DESC')->get();
+        return api_response(true,null, 200, 'success','successfully fetched all students', $students);
     }
 
     /**
@@ -27,24 +25,38 @@ class PaymentController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+//'amount','studentId'
+        try{
+            $validator = Validator::make($request->all(), [
+                'amount' => 'required|integer|max:50',
+                'studentId' => 'required|integer',
+            ]);
+
+            if ($validator->fails())
+                return api_response(false,$validator->messages(), 200, 'error','invalid data sent', $request->all());
+
+            $payment = new Payment();
+            $payment->amount = $request['amount'];
+            $payment->studentId = $request['studentId'];
+
+
+            $payment->save();
+            return api_response(true,null, 200, 'success','successfully saved payment', $payment);
+        }catch (\Exception $exception){
+            return api_response(true,$exception->getMessage(), 200, 'error','error saving student', $request->all());
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show(Student $student)
     {
         //
     }
@@ -52,34 +64,42 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payment $payment)
+    public function edit(Student $student)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Payment $payment)
+
+    public function update(Request $request, $id)
     {
-        //
+        //'firstName','lastName','phoneNumber','regNumber'
+        try{
+            $payment = Payment::find($id);
+            if(isset($request['amount']))
+                $payment->amount = $request['amount'];
+            if(isset($request['studentId']))
+                $payment->studentId = $request['studentId'];
+
+            $payment->save();
+            return api_response(true,null, 200, 'success','successfully updated payment', $payment);
+        }catch (\Exception $exception){
+            return api_response(true,$exception->getMessage(), 200, 'error','error updating payment', $request->all());
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Payment $payment)
+
+    public function destroy($id)
     {
-        //
+        try{
+            $payment = Payment::find($id);
+            $payment->delete();
+            return api_response(true,null, 200, 'success','successfully deleted payment', $payment);
+        }catch (\Exception $exception){
+            return api_response(true,$exception->getMessage(), 200, 'success','error deleting payment', null);
+        }
     }
 }
