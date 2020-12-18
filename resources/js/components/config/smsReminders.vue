@@ -60,11 +60,10 @@ export default {
             items: [
                 {name :'John Doe',message:'qwerty12', created_at:'10/12/2020'}
             ],
-            filter:"",
             perPage: 5,
             currentPage: 1,
             filter: null,
-            totalRows: 1,    
+            totalRows: 1,
         }
     },
     computed: {

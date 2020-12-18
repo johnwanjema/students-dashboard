@@ -60,7 +60,6 @@ export default {
             items: [
                 { class: 5, first_name: 'Dickerson', amount:300 ,last_name: 'Macdonald' },
             ],
-            filter:'',
             perPage: 5,
             currentPage: 1,
             filter: null,
