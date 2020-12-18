@@ -34,7 +34,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                     <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-6">
                                         <b-input-group>
                                             <b-form-input id="filter-input" v-model="filter" type="search" placeholder="Type to Search"></b-form-input>
                                             <b-input-group-append>
@@ -123,7 +123,7 @@ export default {
                 amount:'',
                 date:'',
             }),
-            editMode:false
+            editMode:false,
         }
     },
     computed: {
