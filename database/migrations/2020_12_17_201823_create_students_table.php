@@ -20,7 +20,6 @@ class CreateStudentsTable extends Migration
             $table->string('lastName')->nullable();
             $table->string('phoneNumber')->nullable();
             $table->string('regNumber')->nullable();
-
             $table->timestamps();
         });
     }
