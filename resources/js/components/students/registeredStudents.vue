@@ -1,3 +1,4 @@
+
 <template>
     <div class="content">
         <!-- Animated -->
@@ -147,9 +148,17 @@ export default {
         openEditModal(student){
             $('#mediumModal').modal('show');
             this.editMode = true;
+        },
+        getStudents(){
+            axios.get('/api/students/').then(({ data }) => {
+                console.log(data)
+            }).catch((error) => {
+                console.log(error);
+            });
         }
     },
     mounted() {
+        this.getStudents()
         this.totalRows = this.items.length
     },
 }
