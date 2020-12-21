@@ -42,10 +42,10 @@ class StudentController extends Controller
                 return api_response(false,$validator->messages(), 200, 'error','invalid data sent', $request->all());
             }
             $student = new Student();
-            $student->firstName = $request['email'];
-            $student->lastName = $request['phoneNumber'];
-            $student->phoneNumber = $request['category'];
-            $student->regNumber = $request['subject'];
+            $student->firstName = $request['firstName'];
+            $student->lastName = $request['lastName'];
+            $student->phoneNumber = $request['phoneNumber'];
+            $student->regNumber = $request['regNumber'];
 
 
             $student->save();
