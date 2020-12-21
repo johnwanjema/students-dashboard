@@ -115,7 +115,13 @@ export default {
             perPage: 5,
             currentPage: 1,
             filter: null,
-            totalRows: 1,
+            totalRows: 1, 
+            form : new Form({
+                name:'',
+                amount:'',
+                date:'',
+            }),
+            editMode:false,     
         }
     },
     computed: {

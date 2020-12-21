@@ -36,6 +36,9 @@ Vue.use(BootstrapVue)
 import { Form } from 'vform'
 window.Form = Form;
 
+import axios from "axios";
+window.axios = axios;
+
 const app = new Vue({
     el: '#app',
     router,

@@ -117,6 +117,12 @@ export default {
             currentPage: 1,
             filter: null,
             totalRows: 1,
+            form : new Form({
+                name:'',
+                amount:'',
+                date:'',
+            }),
+            editMode:false,    
         }
     },
     computed: {
