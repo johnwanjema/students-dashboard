@@ -81,25 +81,31 @@
                         <h5 v-if="!editMode" class="modal-title" id="mediumModalLabel">Add student</h5>
                         <h5 v-else class="modal-title" id="mediumModalLabel">Update student</h5>
                     </div>
+                    <form @submit.prevent="addStudent">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="company" class="form-control-label">First Name:</label>
-                            <input v-model="form.first_name" type="text" id="company" placeholder="Enter first name" class="form-control" />
+                            <input v-model="form.firstName" type="text" id="company" placeholder="Enter first name" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label  class="form-control-label">Last Name:</label>
-                            <input v-model="form.last_name" type="text" placeholder="Enter last name" class="form-control" />
+                            <input v-model="form.lastName" type="text" placeholder="Enter last name" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label  class="form-control-label">Class:</label>
-                            <input v-model="form.class" type="number" placeholder="Enter class" class="form-control" />
+                            <label  class="form-control-label">Registration Number:</label>
+                            <input v-model="form.regNumber" type="text" placeholder="Enter class" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label  class="form-control-label">Phone Number:</label>
+                            <input v-model="form.phoneNumber" type="text" placeholder="Enter phone number" class="form-control" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button v-if="!editMode" type="button" class="btn btn-primary">Add Student</button>
-                        <button v-else type="button" class="btn btn-primary">Update Student</button>
+                        <button v-if="!editMode" type="submit" class="btn btn-primary">Add Student</button>
+                        <button v-else type="submit" class="btn btn-primary">Update Student</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -112,22 +118,18 @@ import $ from 'jquery';
 export default {
     data() {
         return {
-            fields: ['#','first_name', 'last_name', 'class','actions'],
-            items: [
-                { class: 'abc', first_name: 'Dickerson', last_name: 'Macdonald' },
-                { class: 'efg', first_name: 'Larsen', last_name: 'Shaw' },
-                { class: 'ijk', first_name: 'Geneva', last_name: 'Wilson' },
-                { class: 'mno', first_name: 'Jami', last_name: 'Carney' }
-            ],
+            fields: ['#','firstName', 'lastName', 'regNumber','phoneNumber','actions'],
+            items: [ ],
             perPage: 5,
             currentPage: 1,
             filter: null,
             totalRows: 1,
             editMode:false,
             form : new Form({
-                first_name:'',
-                last_name:'',
-                class:'',
+                firstName:'',
+                lastName:'',
+                phoneNumber:'',
+                regNumber:''
             })
         }
     },
@@ -151,15 +153,27 @@ export default {
         },
         getStudents(){
             axios.get('/api/students/').then(({ data }) => {
-                console.log(data)
+                console.log(data);
+                this.items = data.data;
+                this.totalRows = this.items.length
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
+        addStudent(){
+            axios.post('/api/students/',this.form).then(({ data }) => {
+                console.log(data);
+                if(data.success){
+                    this.getStudents();
+                    $('#mediumModal').modal('hide');
+                }
             }).catch((error) => {
                 console.log(error);
             });
         }
     },
     mounted() {
-        this.getStudents()
-        this.totalRows = this.items.length
+        this.getStudents();
     },
 }
 </script>
