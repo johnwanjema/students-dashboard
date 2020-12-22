@@ -81,7 +81,7 @@
                         <h5 v-if="!editMode" class="modal-title" id="mediumModalLabel">Add student</h5>
                         <h5 v-else class="modal-title" id="mediumModalLabel">Update student</h5>
                     </div>
-                    <form @submit.prevent="addStudent">
+                    <form @submit.prevent="editMode ? updateStudent() : addStudent()">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="company" class="form-control-label">First Name:</label>
@@ -101,9 +101,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         <button v-if="!editMode" type="submit" class="btn btn-primary">Add Student</button>
                         <button v-else type="submit" class="btn btn-primary">Update Student</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                     </form>
                 </div>
@@ -126,6 +126,7 @@ export default {
             totalRows: 1,
             editMode:false,
             form : new Form({
+                id:'',
                 firstName:'',
                 lastName:'',
                 phoneNumber:'',
@@ -150,10 +151,11 @@ export default {
         openEditModal(student){
             $('#mediumModal').modal('show');
             this.editMode = true;
+            this.form.fill(student)
+            console.log(this.form);
         },
         getStudents(){
             axios.get('/api/students/').then(({ data }) => {
-                console.log(data);
                 this.items = data.data;
                 this.totalRows = this.items.length
             }).catch((error) => {
@@ -162,10 +164,37 @@ export default {
         },
         addStudent(){
             axios.post('/api/students/',this.form).then(({ data }) => {
-                console.log(data);
+                // console.log(data);
                 if(data.success){
+                    this.form.reset();
                     this.getStudents();
                     $('#mediumModal').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Student added.',
+                        showConfirmButton: true,
+                        timer: 1000
+                    }); 
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
+        updateStudent(){
+             axios.put('/api/students/'+ this.form.id,this.form).then(({ data }) => {
+                // console.log(data);
+                if(data.success){
+                    this.form.reset();
+                    this.getStudents();
+                    $('#mediumModal').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Student updated.',
+                        showConfirmButton: true,
+                        timer: 1000
+                    }); 
                 }
             }).catch((error) => {
                 console.log(error);
