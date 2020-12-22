@@ -39,6 +39,9 @@ window.Form = Form;
 import axios from "axios";
 window.axios = axios;
 
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+
 const app = new Vue({
     el: '#app',
     router,
